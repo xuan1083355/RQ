@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隨機問卷跳轉</title>
+    <script>
+        window.onload = function() {
+            // 定義三個問卷連結
+            var surveys = [
+                "https://www.surveycake.com/s/yWggp",
+                "https://www.surveycake.com/s/eyvoV",
+                "https://www.surveycake.com/s/467LQ"
+            ];
+
+            // 隨機選擇一個問卷
+            var randomIndex = Math.floor(Math.random() * surveys.length);
+            var selectedSurvey = surveys[randomIndex];
+
+            // 跳轉到選擇的問卷
+            window.location.href = selectedSurvey;
+        };
+    </script>
+</head>
+<body>
+    <p>正在隨機跳轉到問卷，請稍候...</p>
+</body>
+</html>
