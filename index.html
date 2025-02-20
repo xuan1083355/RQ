@@ -3,26 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隨機問卷跳轉</title>
+    <title>頁面跳轉至問卷中...</title>
     <script>
         window.onload = function() {
-            // 定義三個問卷連結
+            // 定義三個問卷連結及權重
             var surveys = [
-                "https://www.surveycake.com/s/yWggp",
-                "https://www.surveycake.com/s/eyvoV",
-                "https://www.surveycake.com/s/467LQ"
+                { url: "https://www.surveycake.com/s/yWggp", weight: 33},
+                { url: "https://www.surveycake.com/s/eyvoV", weight: 34},
+                { url: "https://www.surveycake.com/s/467LQ", weight: 33}
             ];
 
-            // 隨機選擇一個問卷
-            var randomIndex = Math.floor(Math.random() * surveys.length);
-            var selectedSurvey = surveys[randomIndex];
+            // 隨機選擇一個數字*全部的權重
+            var total_weight = surveys.reduce((sum, survey)=> sum + survey.weight, 0);
+            var random_num = Math.random() * total_weight;
 
-            // 跳轉到選擇的問卷
-            window.location.href = selectedSurvey;
+            // 查看是哪個問卷
+            var cumulativeWeight = 0;
+            for(var i = 0; i < surveys.length; i++){
+                cumulativeWeight += surveys[i].weight;
+                if( random_num <= cumulativeWeight ){    
+                    window.location.href = surveys[i].url; // 跳轉到選擇的問卷
+                    break;
+                }
+            }
         };
     </script>
 </head>
 <body>
-    <p>正在隨機跳轉到問卷，請稍候...</p>
+    <p>正在跳轉到問卷，請稍候...</p>
 </body>
 </html>
