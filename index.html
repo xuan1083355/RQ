@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>頁面跳轉至問卷中...</title>
+    <script>
+        window.onload = function() {
+            // 定義三個問卷連結及權重
+            var surveys = [
+                { url: "https://www.surveycake.com/s/yWggp", weight: 33},
+                { url: "https://www.surveycake.com/s/gA8xZ", weight: 34},
+                { url: "https://www.surveycake.com/s/G6ey9", weight: 33}
+            ];
+
+            // 隨機選擇一個數字*全部的權重
+            var total_weight = surveys.reduce((sum, survey)=> sum + survey.weight, 0);
+            var random_num = Math.random() * total_weight;
+
+            // 查看是哪個問卷
+            var cumulativeWeight = 0;
+            for(var i = 0; i < surveys.length; i++){
+                cumulativeWeight += surveys[i].weight;
+
+                if( random_num <= cumulativeWeight ){    
+                    window.location.href = surveys[i].url; // 跳轉到選擇的問卷
+                    break;
+                }
+                
+            }
+        };
+    </script>
+</head>
+<body>
+    <p>正在跳轉到問卷，請稍候...</p>
+</body>
+</html>
